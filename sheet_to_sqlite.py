@@ -9,7 +9,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 
-db = SqliteDatabase('w3.db')
+db = SqliteDatabase('w5.db')
 #table model
 class Gpa(Model):
     GpaID = AutoField()
