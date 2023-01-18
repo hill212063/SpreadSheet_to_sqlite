@@ -56,6 +56,7 @@ SheetsID = []
 SheetsRange = []
 
 
+
 def main():
     """Shows basic usage of the Sheets API.
     Prints values from a sample spreadsheet.
@@ -109,6 +110,7 @@ def main():
             for row_idx in range(len(values)-1):
                 row = values[row_idx]
                 if(row[6] != values[row_idx+1][6]):
+                    semester_block.append(row)
                     gpa_val = (semester_credit+((float(row[2])*float(row[4]))))/(raw_semester_credit+float(row[2]))
                     gpa_val = math.floor(gpa_val*100)/100
                     gpa_recent = Gpa(GPA=gpa_val)
@@ -130,22 +132,11 @@ def main():
                     raw_semester_credit = 0
                     semester_block = []
                     if(values[row_idx+1][6]==(';')):
-                        subject_recent = Subjects(real_subject_id=row[0],
-                                subject_name=row[1],
-                                credit=int(row[2]),
-                                grade_char=row[3],
-                                grade_int=float(row[4]),
-                                year=row[5],
-                                semester=int(row[6]),
-                                UserID=i,
-                                GpaID=gpa_recent,
-                                GpaxID=i)
-                        subject_recent.save()
                         break
                 else:
+                    semester_block.append(row)
                     semester_credit += float(row[2])*float(row[4])
                     raw_semester_credit += float(row[2])
-                semester_block.append(row)
                 credit_sum += float(row[2])*float(row[4])
                 raw_credit_sum += float(row[2])
 
